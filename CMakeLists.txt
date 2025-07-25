@@ -7,12 +7,7 @@ set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/external")
 set(DXLIB_INCLUDE_DIR "${EXTERNAL_DIR}/dxlib")
 set(DXLIB_LIB_DIR "${EXTERNAL_DIR}/dxlib")
 
-add_executable(dxlib_playground main.cpp)
-
-target_include_directories(dxlib_playground PRIVATE ${DXLIB_INCLUDE_DIR})
-target_link_directories(dxlib_playground PRIVATE ${DXLIB_LIB_DIR})
-
-target_link_libraries(dxlib_playground PRIVATE
+set(DXLIB_LIBS
         DxLib
         DxUseCLib
         DxDrawFunc
@@ -31,4 +26,16 @@ target_link_libraries(dxlib_playground PRIVATE
         opus
         silk_common
         celt	# 静的にリンクするライブラリの指定
+)
+
+add_executable(dxlib_playground main.cpp
+        dxlib_wrapper.cpp
+        dxlib_wrapper.h)
+
+target_include_directories(dxlib_playground PRIVATE ${DXLIB_INCLUDE_DIR})
+target_link_directories(dxlib_playground PRIVATE ${DXLIB_LIB_DIR})
+
+target_link_libraries(dxlib_playground PRIVATE
+        ${DXLIB_LIBS}
+        stdc++exp
 )
