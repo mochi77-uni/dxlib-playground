@@ -4,8 +4,8 @@ project(dxlib_playground)
 set(CMAKE_CXX_STANDARD 26)
 
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/external")
-set(DXLIB_INCLUDE_DIR "${EXTERNAL_DIR}/dxlib")
-set(DXLIB_LIB_DIR "${EXTERNAL_DIR}/dxlib")
+set(DXLIB_INCLUDE_DIR "${EXTERNAL_DIR}/dxlib/include")
+set(DXLIB_LIB_DIR "${EXTERNAL_DIR}/dxlib/lib")
 
 set(DXLIB_LIBS
         DxLib
