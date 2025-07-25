@@ -2,11 +2,10 @@
 // Created by Yuta_Chen on 2025-07-25.
 //
 
-#include <DxLib.h>
-
 #include "dxlib_wrapper.h"
 
 #include <stdexcept>
+#include <DxLib.h>
 
 DxLibWrapper::DxLibWrapper() {
 	if (DxLib_Init() == DxFailure)
