@@ -1,5 +1,5 @@
 //
-// Created by Yuta_Chen on 2025-07-25.
+// Created by Yuta on 2025-07-25.
 //
 
 #include "dxlib_wrapper.h"
