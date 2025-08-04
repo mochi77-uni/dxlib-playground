@@ -28,14 +28,20 @@ set(DXLIB_LIBS
         celt	# 静的にリンクするライブラリの指定
 )
 
-add_executable(dxlib_playground main.cpp
-        dxlib_wrapper.cpp
-        dxlib_wrapper.h)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++")
 
-target_include_directories(dxlib_playground PRIVATE ${DXLIB_INCLUDE_DIR})
-target_link_directories(dxlib_playground PRIVATE ${DXLIB_LIB_DIR})
+set(COMMON_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/common")
+file(GLOB COMMON_SRC "${COMMON_INCLUDE_DIR}/*.cpp")
 
-target_link_libraries(dxlib_playground PRIVATE
-        ${DXLIB_LIBS}
-        stdc++exp
-)
+function(add_dxlib_executable TARGET_NAME)
+    add_executable(${TARGET_NAME} ${ARGN} ${COMMON_SRC})
+    target_include_directories(${TARGET_NAME} PRIVATE ${DXLIB_INCLUDE_DIR} ${COMMON_INCLUDE_DIR})
+    target_link_directories(${TARGET_NAME} PRIVATE ${DXLIB_LIB_DIR})
+    target_link_libraries(${TARGET_NAME} PRIVATE
+            ${DXLIB_LIBS}
+            stdc++exp
+    )
+endfunction()
+
+add_dxlib_executable(dxlib_playground main.cpp)
+add_dxlib_executable(no_border_example no_border_example/main.cpp)
